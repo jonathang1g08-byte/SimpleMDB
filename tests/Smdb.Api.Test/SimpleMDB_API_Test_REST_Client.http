@@ -1,47 +1,90 @@
 ### SimpleMDB API Test – REST Client (VS Code)
 ### Base URL
-@baseUrl = http://127.0.0.1:5000
-@resource = api/v1/items
-@itemId = 1
+@host = http://localhost:3000
+@baseUrl = {{host}}/api/v1/movies
+@movieID = 1
 
 ### -------------------------------------------------
-### CREATE (POST)
+### CREATE (POST) a new movie
 ### -------------------------------------------------
-POST {{baseUrl}}/{{resource}}
+POST {{baseUrl}}
 Content-Type: application/json
 
 {
-  "name": "Sample Item",
-  "description": "Created via REST Client",
-  "price": 10.5
+  "id": -1,
+  "title": "Inception",
+  "year": 2010,
+  "description": "A thief enters dreams to steal secrets."
 }
 
 ### -------------------------------------------------
-### READ (GET by ID)
+### READ (GET) a single movie by ID
 ### -------------------------------------------------
-GET {{baseUrl}}/{{resource}}/{{itemId}}
+GET {{baseUrl}}/{{movieID}}
 Accept: application/json
 
 ### -------------------------------------------------
-### UPDATE (PUT)
+### UPDATE (PUT) an existing movie by ID
 ### -------------------------------------------------
-PUT {{baseUrl}}/{{resource}}/{{itemId}}
+PUT {{baseUrl}}/{{movieID}}
 Content-Type: application/json
 
 {
-  "name": "Updated Item",
-  "description": "Updated via REST Client",
-  "price": 12.0
+  "title": "Inception (Updated)",
+  "year": 2010,
+  "description": "A thief enters dreams to steal secrets (updated)."
 }
 
 ### -------------------------------------------------
-### DELETE (DELETE)
+### DELETE (DELETE) a movie by ID
 ### -------------------------------------------------
-DELETE {{baseUrl}}/{{resource}}/{{itemId}}
+DELETE {{baseUrl}}/{{movieID}}
 Accept: application/json
 
 ### -------------------------------------------------
-### LIST (GET with pagination)
+### LIST (GET) movies with pagination
 ### -------------------------------------------------
-GET {{baseUrl}}/{{resource}}?page=1&size=10
+GET {{baseUrl}}?page=1&size=10
+Accept: application/json
+
+### -------------------------------------------------
+### Additional tests: List page 2
+### -------------------------------------------------
+GET {{baseUrl}}?page=2&size=10
+Accept: application/json
+
+### -------------------------------------------------
+### Additional tests: Create with missing field (error case)
+### -------------------------------------------------
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": -1,
+  "title": "",
+  "year": 2025
+}
+
+### -------------------------------------------------
+### Additional tests: Read non-existent movie (404 case)
+### -------------------------------------------------
+GET {{baseUrl}}/9999
+Accept: application/json
+
+### -------------------------------------------------
+### Additional tests: Update non-existent movie (error case)
+### -------------------------------------------------
+PUT {{baseUrl}}/9999
+Content-Type: application/json
+
+{
+  "title": "Ghost Movie",
+  "year": 2025,
+  "description": "This movie does not exist."
+}
+
+### -------------------------------------------------
+### Additional tests: Delete non-existent movie (idempotent)
+### -------------------------------------------------
+DELETE {{baseUrl}}/9999
 Accept: application/json
