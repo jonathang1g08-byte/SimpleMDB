@@ -2,6 +2,7 @@ namespace Smdb.Api;
 
 using Shared.Http;
 using Smdb.Api.Movies;
+using Smdb.Core.Db;
 using Smdb.Core.Movies;
 public class App : HttpServer
 {
