@@ -1,0 +1,47 @@
+### SimpleMDB API Test – REST Client (VS Code)
+### Base URL
+@baseUrl = http://127.0.0.1:5000
+@resource = api/v1/items
+@itemId = 1
+
+### -------------------------------------------------
+### CREATE (POST)
+### -------------------------------------------------
+POST {{baseUrl}}/{{resource}}
+Content-Type: application/json
+
+{
+  "name": "Sample Item",
+  "description": "Created via REST Client",
+  "price": 10.5
+}
+
+### -------------------------------------------------
+### READ (GET by ID)
+### -------------------------------------------------
+GET {{baseUrl}}/{{resource}}/{{itemId}}
+Accept: application/json
+
+### -------------------------------------------------
+### UPDATE (PUT)
+### -------------------------------------------------
+PUT {{baseUrl}}/{{resource}}/{{itemId}}
+Content-Type: application/json
+
+{
+  "name": "Updated Item",
+  "description": "Updated via REST Client",
+  "price": 12.0
+}
+
+### -------------------------------------------------
+### DELETE (DELETE)
+### -------------------------------------------------
+DELETE {{baseUrl}}/{{resource}}/{{itemId}}
+Accept: application/json
+
+### -------------------------------------------------
+### LIST (GET with pagination)
+### -------------------------------------------------
+GET {{baseUrl}}/{{resource}}?page=1&size=10
+Accept: application/json
