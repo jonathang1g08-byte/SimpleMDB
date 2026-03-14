@@ -1,0 +1,72 @@
+# SimpleMDB API Test - cURL Commands
+# Host: http://localhost:3000
+# Base URL: http://localhost:3000/api/v1/movies
+
+# =================================================
+# SUCCESSFUL RESPONSE CASES (5 tests)
+# =================================================
+
+# 1. CREATE (POST) a new movie - SUCCESS
+curl -X POST "http://localhost:3000/api/v1/movies" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": -1,
+    "title": "Inception",
+    "year": 2010,
+    "description": "A thief enters dreams to steal secrets."
+  }'
+
+# 2. READ (GET) an existing movie by ID - SUCCESS
+curl -X GET "http://localhost:3000/api/v1/movies/1" \
+  -H "Accept: application/json"
+
+# 3. UPDATE (PUT) an existing movie by ID - SUCCESS
+curl -X PUT "http://localhost:3000/api/v1/movies/1" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Inception (Updated)",
+    "year": 2010,
+    "description": "A thief enters dreams to steal secrets (updated)."
+  }'
+
+# 4. DELETE (DELETE) an existing movie by ID - SUCCESS
+curl -X DELETE "http://localhost:3000/api/v1/movies/1" \
+  -H "Accept: application/json"
+
+# 5. LIST (GET) movies with pagination - SUCCESS
+curl -X GET "http://localhost:3000/api/v1/movies?page=1&size=10" \
+  -H "Accept: application/json"
+
+# =================================================
+# UNSUCCESSFUL RESPONSE CASES (5 tests)
+# =================================================
+
+# 1. CREATE (POST) with missing required field - UNSUCCESSFUL (400 Bad Request)
+curl -X POST "http://localhost:3000/api/v1/movies" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": -1,
+    "title": "",
+    "year": 2025
+  }'
+
+# 2. READ (GET) a non-existent movie by ID - UNSUCCESSFUL (404 Not Found)
+curl -X GET "http://localhost:3000/api/v1/movies/9999" \
+  -H "Accept: application/json"
+
+# 3. UPDATE (PUT) a non-existent movie by ID - UNSUCCESSFUL (404 Not Found)
+curl -X PUT "http://localhost:3000/api/v1/movies/9999" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Ghost Movie",
+    "year": 2025,
+    "description": "This movie does not exist."
+  }'
+
+# 4. DELETE (DELETE) a non-existent movie by ID - UNSUCCESSFUL (404 Not Found)
+curl -X DELETE "http://localhost:3000/api/v1/movies/9999" \
+  -H "Accept: application/json"
+
+# 5. LIST (GET) with invalid pagination params - UNSUCCESSFUL (400 Bad Request)
+curl -X GET "http://localhost:3000/api/v1/movies?page=-1&size=0" \
+  -H "Accept: application/json"
