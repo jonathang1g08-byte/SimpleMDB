@@ -1,15 +1,21 @@
 namespace Smdb.Core.Db;
 
 using Smdb.Core.Movies;
+using Smdb.Core.Actors;
 public class MemoryDatabase
 {
 	public List<Movie> Movies { get; }
+	public List<Actor> Actors { get; }
 	private int nextMovieId;
+	private int nextActorId;
 	public MemoryDatabase()
 	{
 		Movies = [];
+		Actors = [];
 		SeedMovies();
+		SeedActors();
 		nextMovieId = Movies.Count;
+		nextActorId = Actors.Count;
 	}
 	private void SeedMovies()
 	{
@@ -67,8 +73,23 @@ public class MemoryDatabase
 			new Movie(50, "The Social Network", 2010, "Facebook’s founding sparks friendship and legal battles.")
 		});
 	}
+	private void SeedActors()
+	{
+		Actors.AddRange(new Actor[]
+		{
+			new Actor(1, "Morgan Freeman", 1937, "Veteran actor known for his commanding voice and wide dramatic range."),
+			new Actor(2, "Scarlett Johansson", 1984, "Actress and producer, known for both indie and blockbuster roles."),
+			new Actor(3, "Denzel Washington", 1954, "Two-time Academy Award winner who often portrays authoritative protagonists.")
+		});
+	}
+
 	public int NextMovieId()
 	{
 		return ++nextMovieId;
+	}
+
+	public int NextActorId()
+	{
+		return ++nextActorId;
 	}
 }
