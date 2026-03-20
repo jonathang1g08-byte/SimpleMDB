@@ -2,20 +2,26 @@ namespace Smdb.Core.Db;
 
 using Smdb.Core.Movies;
 using Smdb.Core.Actors;
+using Smdb.Core.ActorMovie;
 public class MemoryDatabase
 {
 	public List<Movie> Movies { get; }
 	public List<Actor> Actors { get; }
+	public List<ActorMovie> ActorMovies { get; }
 	private int nextMovieId;
 	private int nextActorId;
+	private int nextActorMovieId;
 	public MemoryDatabase()
 	{
 		Movies = [];
 		Actors = [];
+		ActorMovies = [];
 		SeedMovies();
 		SeedActors();
+		SeedActorMovies();
 		nextMovieId = Movies.Count;
 		nextActorId = Actors.Count;
+		nextActorMovieId = ActorMovies.Count;
 	}
 	private void SeedMovies()
 	{
@@ -83,6 +89,16 @@ public class MemoryDatabase
 		});
 	}
 
+	private void SeedActorMovies()
+	{
+		ActorMovies.AddRange(new ActorMovie[]
+		{
+			new ActorMovie(1, 1, 1, "Vito Corleone"),
+			new ActorMovie(2, 2, 10, "Dom Cobb"),
+			new ActorMovie(3, 3, 1, "Mayor"),
+		});
+	}
+
 	public int NextMovieId()
 	{
 		return ++nextMovieId;
@@ -91,5 +107,10 @@ public class MemoryDatabase
 	public int NextActorId()
 	{
 		return ++nextActorId;
+	}
+
+	public int NextActorMovieId()
+	{
+		return ++nextActorMovieId;
 	}
 }
