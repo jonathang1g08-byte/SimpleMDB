@@ -1,0 +1,298 @@
+{
+	"info": {
+		"name": "SimpleMDB API Test Collection",
+		"description": "Postman collection for testing SimpleMDB API with 5 successful and 5 unsuccessful CRUD+L operations.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "{{host}}/api/v1/movies",
+			"type": "string"
+		},
+		{
+			"key": "movieID",
+			"value": "1",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "Successful: CREATE a new movie",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": -2,\n  \"title\": \"Inception\",\n  \"year\": 2010,\n  \"description\": \"A thief enters dreams to steal secrets.\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					]
+				}
+			}
+		},
+		{
+			"name": "Successful: READ an existing movie by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/-1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"{{movieID}}"
+					]
+				}
+			}
+		},
+		{
+			"name": "Successful: UPDATE an existing movie by ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Inception (Updated)\",\n  \"year\": 2010,\n  \"description\": \"A thief enters dreams to steal secrets (updated).\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/3",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"{{movieID}}"
+					]
+				}
+			}
+		},
+		{
+			"name": "Successful: DELETE an existing movie by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/{{movieID}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"{{movieID}}"
+					]
+				}
+			}
+		},
+		{
+			"name": "Successful: LIST movies with pagination",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}?page=1&size=10",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			}
+		},
+		{
+			"name": "Unsuccessful: CREATE with missing required field",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"id\": -1,\n  \"title\": \"\",\n  \"year\": 2025\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					]
+				}
+			}
+		},
+		{
+			"name": "Unsuccessful: READ a non-existent movie by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/9999",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"9999"
+					]
+				}
+			}
+		},
+		{
+			"name": "Unsuccessful: UPDATE a non-existent movie by ID",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Ghost Movie\",\n  \"year\": 2025,\n  \"description\": \"This movie does not exist.\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/9999",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"9999"
+					]
+				}
+			}
+		},
+		{
+			"name": "Unsuccessful: DELETE a non-existent movie by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/9999",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies",
+						"9999"
+					]
+				}
+			}
+		},
+		{
+			"name": "Unsuccessful: LIST with invalid pagination params",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}?page=-1&size=0",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"movies"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "-1"
+						},
+						{
+							"key": "size",
+							"value": "0"
+						}
+					]
+				}
+			}
+		}
+	]
+}

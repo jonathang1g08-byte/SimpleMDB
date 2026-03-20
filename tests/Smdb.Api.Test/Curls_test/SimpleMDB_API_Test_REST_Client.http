@@ -1,0 +1,78 @@
+### SimpleMDB API Test – REST Client (VS Code)
+### Base URL
+@host = http://localhost:3000
+@baseUrl = {{host}}/api/v1/movies
+@movieID = 1
+
+### =================================================
+### SUCCESSFUL RESPONSE CASES (5 tests)
+### =================================================
+
+### 1. CREATE (POST) a new movie - SUCCESS
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": -1,
+  "title": "Inception",
+  "year": 2010,
+  "description": "A thief enters dreams to steal secrets."
+}
+
+### 2. READ (GET) an existing movie by ID - SUCCESS
+GET {{baseUrl}}/{{movieID}}
+Accept: application/json
+
+### 3. UPDATE (PUT) an existing movie by ID - SUCCESS
+PUT {{baseUrl}}/{{movieID}}
+Content-Type: application/json
+
+{
+  "title": "Inception (Updated)",
+  "year": 2010,
+  "description": "A thief enters dreams to steal secrets (updated)."
+}
+
+### 4. LIST (GET) movies with pagination - SUCCESS
+GET {{baseUrl}}?page=1&size=10
+Accept: application/json
+
+### 5. DELETE (DELETE) an existing movie by ID - SUCCESS
+DELETE {{baseUrl}}/{{movieID}}
+Accept: application/json
+
+### =================================================
+### UNSUCCESSFUL RESPONSE CASES (5 tests)
+### =================================================
+
+### 1. CREATE (POST) with missing required field - UNSUCCESSFUL (400 Bad Request)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "id": -1,
+  "title": "",
+  "year": 2025
+}
+
+### 2. READ (GET) a non-existent movie by ID - UNSUCCESSFUL (404 Not Found)
+GET {{baseUrl}}/9999
+Accept: application/json
+
+### 3. UPDATE (PUT) a non-existent movie by ID - UNSUCCESSFUL (404 Not Found)
+PUT {{baseUrl}}/9999
+Content-Type: application/json
+
+{
+  "title": "Ghost Movie",
+  "year": 2025,
+  "description": "This movie does not exist."
+}
+
+### 4. DELETE (DELETE) a non-existent movie by ID - UNSUCCESSFUL (404 Not Found)
+DELETE {{baseUrl}}/9999
+Accept: application/json
+
+### 5. LIST (GET) with invalid pagination params - UNSUCCESSFUL (400 Bad Request)
+GET {{baseUrl}}?page=-1&size=0
+Accept: application/json
