@@ -3,25 +3,31 @@ namespace Smdb.Core.Db;
 using Smdb.Core.Movies;
 using Smdb.Core.Actors;
 using Smdb.Core.ActorMovie;
+using Smdb.Core.Users;
 public class MemoryDatabase
 {
 	public List<Movie> Movies { get; }
 	public List<Actor> Actors { get; }
 	public List<ActorMovie> ActorMovies { get; }
+	public List<User> Users { get; }
 	private int nextMovieId;
 	private int nextActorId;
 	private int nextActorMovieId;
+	private int nextUserId;
 	public MemoryDatabase()
 	{
 		Movies = [];
 		Actors = [];
 		ActorMovies = [];
+		Users = [];
 		SeedMovies();
 		SeedActors();
 		SeedActorMovies();
+		SeedUsers();
 		nextMovieId = Movies.Count;
 		nextActorId = Actors.Count;
 		nextActorMovieId = ActorMovies.Count;
+		nextUserId = Users.Count;
 	}
 	private void SeedMovies()
 	{
@@ -99,6 +105,16 @@ public class MemoryDatabase
 		});
 	}
 
+	private void SeedUsers()
+	{
+		Users.AddRange(new User[]
+		{
+			new User(1, "admin", "admin@simplemdb.com", "hashed_password_123"),
+			new User(2, "user1", "user1@simplemdb.com", "hashed_password_456"),
+			new User(3, "user2", "user2@simplemdb.com", "hashed_password_789")
+		});
+	}
+
 	public int NextMovieId()
 	{
 		return ++nextMovieId;
@@ -112,5 +128,10 @@ public class MemoryDatabase
 	public int NextActorMovieId()
 	{
 		return ++nextActorMovieId;
+	}
+
+	public int NextUserId()
+	{
+		return ++nextUserId;
 	}
 }
