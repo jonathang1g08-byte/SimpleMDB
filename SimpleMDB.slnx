@@ -2,10 +2,12 @@
   <Folder Name="/src/">
     <Project Path="src/Smdb.Api/Smdb.Api.csproj" />
     <Project Path="src/Smdb.Core/Smdb.Core.csproj" />
+    <Project Path="src/Smdb.Csr/Smdb.Csr.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Smdb.Api.Test/Smdb.Api.Test.csproj" />
     <Project Path="tests/Smdb.Core.Test/Smdb.Core.Test.csproj" />
+    <Project Path="tests/Smdb.Csr.Test/Smdb.Csr.Test.csproj" />
   </Folder>
   <Project Path="../SharedLibrary/src/Shared/Shared.csproj" />
 </Solution>
