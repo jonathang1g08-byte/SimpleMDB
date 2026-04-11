@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>View User • Simple Movie Database</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/styles/main.css" />
+	<script type="module" src="/scripts/Users/view.js" defer></script>
+</head>
+
+<body>
+	<header>
+		<h1 id="title">User</h1>
+		<nav>
+			<ul>
+				<li><a href="/" class="btn">Home</a></li>
+				<li><a href="/Users/" class="btn">Users</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main class="container">
+		<div id="status" class="status">Loading...</div>
+		<div id="user-details"></div>
+		<div class="form-group">
+			<a href="/Users/edit.html?id=" id="edit-link" class="btn">Edit</a>
+			<button id="delete-btn" class="btn danger" type="button">Delete</button>
+		</div>
+	</main>
+</body>
+
+</html>

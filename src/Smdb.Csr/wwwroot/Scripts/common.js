@@ -40,3 +40,21 @@ export function captureMovieForm(form) {
 	const description = form.description.value.trim();
 	return { title, year, description };
 }
+export function captureUserForm(form) {
+	const username = form.username.value.trim();
+	const email = form.email.value.trim();
+	const passwordHash = form.passwordHash.value.trim();
+	return { username, email, passwordHash };
+}
+export function captureActorMovieForm(form) {
+	const actorId = Number(form.actorId.value);
+	const movieId = Number(form.movieId.value);
+	const role = form.role.value.trim();
+	return { actorId, movieId, role };
+}
+export function captureActorForm(form) {
+	const name = form.name.value.trim();
+	const birthYear = Number(form.birthYear.value);
+	const biography = form.biography.value.trim();
+	return { name, birthYear, biography };
+}

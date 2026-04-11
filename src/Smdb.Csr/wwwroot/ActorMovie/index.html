@@ -3,19 +3,19 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>Movies • Simple Movie Database</title>
+	<title>Actor-Movie Credits • Simple Movie Database</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="stylesheet" href="/styles/main.css" />
-	<script type="module" src="/scripts/Movies/index.js" defer></script>
+	<script type="module" src="/scripts/ActorMovie/index.js" defer></script>
 </head>
 
 <body>
 	<header>
-		<h1>Movies</h1>
+		<h1>Actor-Movie Credits</h1>
 		<nav>
 			<ul>
 				<li><a href="/" class="btn">Home</a></li>
-				<li><a href="/Movies/add.html" class="btn">Add Movie</a></li>
+				<li><a href="/ActorMovie/add.html" class="btn">Add Credit</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -32,14 +32,14 @@
 				<select id="page-size"></select>
 			</div>
 		</div>
-		<div id="movie-list" class="grid cards" style="margin-top:12px;"></div>
+		<div id="actormovie-list" class="grid cards" style="margin-top:12px;"></div>
 	</main>
-	<template id="movie-card">
+	<template id="actormovie-card">
 		<div class="card">
 			<h3>
-				<span class="title"></span>
-				<span class="badge year"></span>
+				<span class="role"></span>
 			</h3>
+			<p class="info"></p>
 			<div class="row-actions">
 				<a class="btn btn-view">View</a>
 				<a class="btn btn-edit">Edit</a>

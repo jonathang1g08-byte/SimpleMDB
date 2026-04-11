@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>Edit User • Simple Movie Database</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/styles/main.css" />
+	<script type="module" src="/scripts/Users/edit.js" defer></script>
+</head>
+
+<body>
+	<header>
+		<h1>Edit User</h1>
+		<nav>
+			<ul>
+				<li><a href="/" class="btn">Home</a></li>
+				<li><a href="/Users/" class="btn">Users</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main class="container">
+		<div id="status" class="status">Loading...</div>
+		<form id="form">
+			<fieldset>
+				<legend>User Details</legend>
+				<div class="form-group">
+					<label for="username">Username:</label>
+					<input type="text" id="username" name="username" required />
+				</div>
+				<div class="form-group">
+					<label for="email">Email:</label>
+					<input type="email" id="email" name="email" required />
+				</div>
+				<div class="form-group">
+					<label for="passwordHash">Password Hash:</label>
+					<input type="text" id="passwordHash" name="passwordHash" required />
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn">Update User</button>
+					<a href="/Users/" class="btn">Cancel</a>
+				</div>
+			</fieldset>
+		</form>
+	</main>
+</body>
+
+</html>
