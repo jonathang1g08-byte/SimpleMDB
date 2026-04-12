@@ -9,7 +9,7 @@ import { $, apiFetch, renderStatus, getQueryParam, captureActorMovieForm } from 
 		return;
 	}
 	try {
-		const am = await apiFetch(`/api/v1/actormovie/${encodeURIComponent(id)}`);
+		const am = await apiFetch(`/actormovie/${encodeURIComponent(id)}`);
 		form.actorId.value = am.actorId ?? '';
 		form.movieId.value = am.movieId ?? '';
 		form.role.value = am.role ?? '';
@@ -22,7 +22,7 @@ import { $, apiFetch, renderStatus, getQueryParam, captureActorMovieForm } from 
 		ev.preventDefault();
 		const payload = captureActorMovieForm(form);
 		try {
-			const updated = await apiFetch(`/api/v1/actormovie/${encodeURIComponent(id)}`, {
+			const updated = await apiFetch(`/actormovie/${encodeURIComponent(id)}`, {
 				method: 'PUT',
 				body: JSON.stringify(payload),
 			});

@@ -8,7 +8,7 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
 	const statusEl = $('#status');
 	const tpl = $('#actormovie-card');
 	try {
-		const payload = await apiFetch(`/api/v1/actormovie?page=${page}&size=${size}`);
+		const payload = await apiFetch(`/actormovie?page=${page}&size=${size}`);
 		const items = Array.isArray(payload) ? payload : (payload.data || []);
 		clearChildren(listEl);
 		if (items.length === 0) {
@@ -32,7 +32,7 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
 			const id = btn.dataset.id;
 			if (!confirm('Delete this credit? This cannot be undone.')) return;
 			try {
-				await apiFetch(`/api/v1/actormovie/${encodeURIComponent(id)}`, { method: 'DELETE' });
+				await apiFetch(`/actormovie/${encodeURIComponent(id)}`, { method: 'DELETE' });
 				renderStatus(statusEl, 'ok', `Credit ${id} deleted.`);
 				setTimeout(() => location.reload(), 2000);
 			} catch (err) {

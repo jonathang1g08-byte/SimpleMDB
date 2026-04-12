@@ -4,7 +4,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
 	const statusEl = $('#status');
 	if (!id) return renderStatus(statusEl, 'err', 'Missing ?id in URL.');
 	try {
-		const u = await apiFetch(`/api/v1/users/${encodeURIComponent(id)}`);
+		const u = await apiFetch(`/users/${encodeURIComponent(id)}`);
 		$('#title').textContent = u.username;
 		const details = $('#user-details');
 		details.innerHTML = `
@@ -18,7 +18,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
 		$('#delete-btn').addEventListener('click', async () => {
 			if (!confirm('Delete this user? This cannot be undone.')) return;
 			try {
-				await apiFetch(`/api/v1/users/${encodeURIComponent(u.id)}`, { method: 'DELETE' });
+				await apiFetch(`/users/${encodeURIComponent(u.id)}`, { method: 'DELETE' });
 				renderStatus(statusEl, 'ok', 'User deleted.');
 				setTimeout(() => window.location.href = '/Users/', 2000);
 			} catch (err) {

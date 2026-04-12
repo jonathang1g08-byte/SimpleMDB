@@ -8,7 +8,7 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
 	const statusEl = $('#status');
 	const tpl = $('#user-card');
 	try {
-		const payload = await apiFetch(`/api/v1/users?page=${page}&size=${size}`);
+		const payload = await apiFetch(`/users?page=${page}&size=${size}`);
 		const items = Array.isArray(payload) ? payload : (payload.data || []);
 		clearChildren(listEl);
 		if (items.length === 0) {
@@ -32,7 +32,7 @@ import { $, apiFetch, renderStatus, clearChildren, getQueryParam } from '/script
 			const id = btn.dataset.id;
 			if (!confirm('Delete this user? This cannot be undone.')) return;
 			try {
-				await apiFetch(`/api/v1/users/${encodeURIComponent(id)}`, { method: 'DELETE' });
+				await apiFetch(`/users/${encodeURIComponent(id)}`, { method: 'DELETE' });
 				renderStatus(statusEl, 'ok', `User ${id} deleted.`);
 				setTimeout(() => location.reload(), 2000);
 			} catch (err) {

@@ -7,7 +7,7 @@ import { $, apiFetch, renderStatus, captureActorMovieForm } from '/scripts/commo
 		ev.preventDefault();
 		const payload = captureActorMovieForm(form);
 		try {
-			const created = await apiFetch('/api/v1/actormovie', { method: 'POST', body: JSON.stringify(payload) });
+			const created = await apiFetch('/actormovie', { method: 'POST', body: JSON.stringify(payload) });
 			renderStatus(statusEl, 'ok', `Created credit #${created.id} for role "${created.role}".`);
 			form.reset();
 		} catch (err) {

@@ -4,7 +4,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
 	const statusEl = $('#status');
 	if (!id) return renderStatus(statusEl, 'err', 'Missing ?id in URL.');
 	try {
-		const am = await apiFetch(`/api/v1/actormovie/${encodeURIComponent(id)}`);
+		const am = await apiFetch(`/actormovie/${encodeURIComponent(id)}`);
 		$('#title').textContent = am.role;
 		const details = $('#credit-details');
 		details.innerHTML = `
@@ -18,7 +18,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
 		$('#delete-btn').addEventListener('click', async () => {
 			if (!confirm('Delete this credit? This cannot be undone.')) return;
 			try {
-				await apiFetch(`/api/v1/actormovie/${encodeURIComponent(am.id)}`, { method: 'DELETE' });
+				await apiFetch(`/actormovie/${encodeURIComponent(am.id)}`, { method: 'DELETE' });
 				renderStatus(statusEl, 'ok', 'Credit deleted.');
 				setTimeout(() => window.location.href = '/ActorMovie/', 2000);
 			} catch (err) {

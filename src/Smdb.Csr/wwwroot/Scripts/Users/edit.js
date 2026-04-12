@@ -9,7 +9,7 @@ import { $, apiFetch, renderStatus, getQueryParam, captureUserForm } from '/scri
 		return;
 	}
 	try {
-		const u = await apiFetch(`/api/v1/users/${encodeURIComponent(id)}`);
+		const u = await apiFetch(`/users/${encodeURIComponent(id)}`);
 		form.username.value = u.username ?? '';
 		form.email.value = u.email ?? '';
 		form.passwordHash.value = u.passwordHash ?? '';
@@ -22,7 +22,7 @@ import { $, apiFetch, renderStatus, getQueryParam, captureUserForm } from '/scri
 		ev.preventDefault();
 		const payload = captureUserForm(form);
 		try {
-			const updated = await apiFetch(`/api/v1/users/${encodeURIComponent(id)}`, {
+			const updated = await apiFetch(`/users/${encodeURIComponent(id)}`, {
 				method: 'PUT',
 				body: JSON.stringify(payload),
 			});

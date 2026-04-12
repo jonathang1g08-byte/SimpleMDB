@@ -9,7 +9,7 @@ import { $, apiFetch, renderStatus, getQueryParam, captureActorForm } from '/scr
 		return;
 	}
 	try {
-		const a = await apiFetch(`/api/v1/actors/${encodeURIComponent(id)}`);
+		const a = await apiFetch(`/actors/${encodeURIComponent(id)}`);
 		form.name.value = a.name ?? '';
 		form.birthYear.value = a.birthYear ?? '';
 		form.biography.value = a.biography ?? '';
@@ -22,7 +22,7 @@ import { $, apiFetch, renderStatus, getQueryParam, captureActorForm } from '/scr
 		ev.preventDefault();
 		const payload = captureActorForm(form);
 		try {
-			const updated = await apiFetch(`/api/v1/actors/${encodeURIComponent(id)}`, {
+			const updated = await apiFetch(`/actors/${encodeURIComponent(id)}`, {
 				method: 'PUT',
 				body: JSON.stringify(payload),
 			});

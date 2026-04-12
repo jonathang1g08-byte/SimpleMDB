@@ -4,7 +4,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
 	const statusEl = $('#status');
 	if (!id) return renderStatus(statusEl, 'err', 'Missing ?id in URL.');
 	try {
-		const a = await apiFetch(`/api/v1/actors/${encodeURIComponent(id)}`);
+		const a = await apiFetch(`/actors/${encodeURIComponent(id)}`);
 		$('#title').textContent = a.name;
 		const details = $('#actor-details');
 		details.innerHTML = `
@@ -18,7 +18,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
 		$('#delete-btn').addEventListener('click', async () => {
 			if (!confirm('Delete this actor? This cannot be undone.')) return;
 			try {
-				await apiFetch(`/api/v1/actors/${encodeURIComponent(a.id)}`, { method: 'DELETE' });
+				await apiFetch(`/actors/${encodeURIComponent(a.id)}`, { method: 'DELETE' });
 				renderStatus(statusEl, 'ok', 'Actor deleted.');
 				setTimeout(() => window.location.href = '/Actors/', 2000);
 			} catch (err) {

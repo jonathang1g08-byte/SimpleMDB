@@ -7,7 +7,7 @@ import { $, apiFetch, renderStatus, captureActorForm } from '/scripts/common.js'
 		ev.preventDefault();
 		const payload = captureActorForm(form);
 		try {
-			const created = await apiFetch('/api/v1/actors', { method: 'POST', body: JSON.stringify(payload) });
+			const created = await apiFetch('/actors', { method: 'POST', body: JSON.stringify(payload) });
 			renderStatus(statusEl, 'ok', `Created actor #${created.id} "${created.name}" (${created.birthYear}).`);
 			form.reset();
 		} catch (err) {

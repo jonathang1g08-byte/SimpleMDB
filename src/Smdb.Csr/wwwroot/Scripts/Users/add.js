@@ -7,7 +7,7 @@ import { $, apiFetch, renderStatus, captureUserForm } from '/scripts/common.js';
 		ev.preventDefault();
 		const payload = captureUserForm(form);
 		try {
-			const created = await apiFetch('/api/v1/users', { method: 'POST', body: JSON.stringify(payload) });
+			const created = await apiFetch('/users', { method: 'POST', body: JSON.stringify(payload) });
 			renderStatus(statusEl, 'ok', `Created user #${created.id} "${created.username}".`);
 			form.reset();
 		} catch (err) {
