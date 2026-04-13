@@ -20,7 +20,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
 			try {
 				await apiFetch(`/users/${encodeURIComponent(u.id)}`, { method: 'DELETE' });
 				renderStatus(statusEl, 'ok', 'User deleted.');
-				setTimeout(() => window.location.href = '/Users/', 2000);
+				setTimeout(() => window.location.href = '/Users/index.html', 2000);
 			} catch (err) {
 				renderStatus(statusEl, 'err', `Delete failed: ${err.message}`);
 			}

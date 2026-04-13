@@ -20,7 +20,7 @@ import { $, apiFetch, renderStatus, getQueryParam } from '/scripts/common.js';
 			try {
 				await apiFetch(`/actormovie/${encodeURIComponent(am.id)}`, { method: 'DELETE' });
 				renderStatus(statusEl, 'ok', 'Credit deleted.');
-				setTimeout(() => window.location.href = '/ActorMovie/', 2000);
+				setTimeout(() => window.location.href = '/ActorMovie/index.html', 2000);
 			} catch (err) {
 				renderStatus(statusEl, 'err', `Delete failed: ${err.message}`);
 			}
