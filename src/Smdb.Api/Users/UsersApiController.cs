@@ -25,6 +25,15 @@ public class UsersApiController
 		await next();
 	}
 
+	public async Task CreateUser(HttpListenerRequest req, HttpListenerResponse res, Hashtable props, Func<Task> next)
+	{
+		var text = (string)props["req.text"]!;
+		var user = JsonSerializer.Deserialize<User>(text, JsonSerializerOptions.Web);
+		var result = await usersService.CreateUser(user!);
+		await JsonUtils.SendResultResponse(req, res, props, result);
+		await next();
+	}
+
 	public async Task ReadUser(HttpListenerRequest req, HttpListenerResponse res, Hashtable props, Func<Task> next)
 	{
 		var uParams = (NameValueCollection)props["req.params"]!;

@@ -8,6 +8,7 @@ public class UsersRouter : HttpRouter
 	{
 		UseParametrizedRouteMatching();
 		MapGet("/", apiController.ReadUsers);
+		MapPost("/", HttpUtils.ReadRequestBodyAsText, apiController.CreateUser);
 		MapGet("/:id", apiController.ReadUser);
 		MapPut("/:id", HttpUtils.ReadRequestBodyAsText, apiController.UpdateUser);
 		MapDelete("/:id", apiController.DeleteUser);
