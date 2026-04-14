@@ -26,7 +26,8 @@ public class ActorsApiController
 	}
 
 	public async Task CreateActor(HttpListenerRequest req, HttpListenerResponse res, Hashtable props, Func<Task> next)
-	{
+	{ //here, `CreateActor()` reads the request body to get the actor data, deserializes it into an `Actor` object.
+		//  And then calls the `CreateActor()` method of the `actorService` to create a new actor. It then sends the result back as a JSON response.
 		var text = (string)props["req.text"]!;
 		var actor = JsonSerializer.Deserialize<Actor>(text, JsonSerializerOptions.Web);
 		var result = await actorService.CreateActor(actor!);

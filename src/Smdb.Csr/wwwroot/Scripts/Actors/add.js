@@ -3,7 +3,8 @@ import { $, apiFetch, renderStatus, captureActorForm } from '/scripts/common.js'
 	const form = $('#form');
 	const statusEl = $('#status');
 	renderStatus(statusEl, 'ok', 'New actor. You can edit and save.');
-	form.addEventListener('submit', async (ev) => {
+	form.addEventListener('submit', async (ev) => { // `Actors/add.js` calls `captureActorForm()` to get the form data, then calls `apiFetch()` to send a POST request to the server to create a new actor. 
+		// If the request is successful, it renders a success message with the created actor's details and resets the form. If there's an error, it renders an error message.
 		ev.preventDefault();
 		const payload = captureActorForm(form);
 		try {
