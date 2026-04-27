@@ -5,6 +5,7 @@ using Smdb.Api.Movies;
 using Smdb.Api.Actors;
 using Smdb.Api.ActorMovie;
 using Smdb.Api.Users;
+using Smdb.Api.Home;
 using Smdb.Core.Movies;
 using Smdb.Core.Actors;
 using Smdb.Core.ActorMovie;
@@ -19,6 +20,9 @@ public class App : HttpServer
 		var movieServ = new DefaultMovieService(movieRepo);
 		var movieCtrl = new MoviesController(movieServ);
 		var movieRouter = new MoviesRouter(movieCtrl);
+
+		var homeSsrCtrl = new HomeSsrController(movieServ);
+		var homeRouter = new HomeRouter(homeSsrCtrl);
 
 		var actorRepo = new ActorsRepository(db);
 		var actorServ = new ActorsService(actorRepo);
@@ -49,6 +53,7 @@ public class App : HttpServer
 		router.Use(HttpUtils.ParseRequestUrl);
 		router.Use(HttpUtils.ParseRequestQueryString);
 		router.UseParametrizedRouteMatching();
+		router.UseRouter("/", homeRouter);
 		router.UseRouter("/api/v1", apiRouter);
 		apiRouter.UseRouter("/movies", movieRouter);
 		apiRouter.UseRouter("/actors", actorRouter);
