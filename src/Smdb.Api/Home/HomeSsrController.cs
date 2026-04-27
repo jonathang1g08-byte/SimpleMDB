@@ -18,10 +18,12 @@ public class HomeSsrController
 
 	public async Task RenderLandingPage(HttpListenerRequest req, HttpListenerResponse res, Hashtable props, Func<Task> next)
 	{
-		var movies = await movieService.ReadMovies(1, 6);
+		var moviesResult = await movieService.ReadMovies(1, 6);
+		var pagedMovies = moviesResult.Payload!;
+		var movies = pagedMovies.Values;
 
 		var moviesHtml = new System.Text.StringBuilder();
-		foreach (var movie in movies.Data)
+		foreach (var movie in movies)
 		{
 			moviesHtml.Append($@"
 			<div class='movie-card'>
