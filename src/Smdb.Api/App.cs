@@ -38,9 +38,6 @@ public class App : HttpServer
 
 		var usersRepo = new UsersRepository(db);
 		var usersServ = new UsersService(usersRepo);
-		var authApiCtrl = new AuthApiController(usersServ);
-		var authSsrCtrl = new AuthSsrController(usersServ);
-		var authRouter = new AuthRouter(authApiCtrl, authSsrCtrl);
 		var usersApiCtrl = new UsersApiController(usersServ);
 		var usersSsrCtrl = new UsersSsrController(usersServ);
 		var usersRouter = new UsersRouter(usersApiCtrl, usersSsrCtrl);
@@ -58,7 +55,6 @@ public class App : HttpServer
 		apiRouter.UseRouter("/movies", movieRouter);
 		apiRouter.UseRouter("/actors", actorRouter);
 		apiRouter.UseRouter("/actormovie", actorMovieRouter);
-		apiRouter.UseRouter("/auth", authRouter);
 		apiRouter.UseRouter("/users", usersRouter);
 	}
 	// <-- Rest of the code below goes here.
