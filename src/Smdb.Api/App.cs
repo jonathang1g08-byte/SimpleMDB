@@ -5,6 +5,7 @@ using Smdb.Api.Movies;
 using Smdb.Api.Actors;
 using Smdb.Api.ActorMovie;
 using Smdb.Api.Users;
+using Smdb.Api.Home;
 using Smdb.Core.Movies;
 using Smdb.Core.Actors;
 using Smdb.Core.ActorMovie;
@@ -20,6 +21,9 @@ public class App : HttpServer
 		var movieCtrl = new MoviesController(movieServ);
 		var movieRouter = new MoviesRouter(movieCtrl);
 
+		var homeSsrCtrl = new HomeSsrController(movieServ);
+		var homeRouter = new HomeRouter(homeSsrCtrl);
+
 		var actorRepo = new ActorsRepository(db);
 		var actorServ = new ActorsService(actorRepo);
 		var actorApiCtrl = new ActorsApiController(actorServ);
@@ -34,9 +38,6 @@ public class App : HttpServer
 
 		var usersRepo = new UsersRepository(db);
 		var usersServ = new UsersService(usersRepo);
-		var authApiCtrl = new AuthApiController(usersServ);
-		var authSsrCtrl = new AuthSsrController(usersServ);
-		var authRouter = new AuthRouter(authApiCtrl, authSsrCtrl);
 		var usersApiCtrl = new UsersApiController(usersServ);
 		var usersSsrCtrl = new UsersSsrController(usersServ);
 		var usersRouter = new UsersRouter(usersApiCtrl, usersSsrCtrl);
@@ -49,11 +50,11 @@ public class App : HttpServer
 		router.Use(HttpUtils.ParseRequestUrl);
 		router.Use(HttpUtils.ParseRequestQueryString);
 		router.UseParametrizedRouteMatching();
+		router.UseRouter("/", homeRouter);
 		router.UseRouter("/api/v1", apiRouter);
 		apiRouter.UseRouter("/movies", movieRouter);
 		apiRouter.UseRouter("/actors", actorRouter);
 		apiRouter.UseRouter("/actormovie", actorMovieRouter);
-		apiRouter.UseRouter("/auth", authRouter);
 		apiRouter.UseRouter("/users", usersRouter);
 	}
 	// <-- Rest of the code below goes here.
